@@ -19,7 +19,7 @@ steps:
     resourceGroupName: 'dns-test-deligation'
     location: 'UK South'
     templateLocation: 'Linked artifact'
-    csmFile: 'https://raw.githubusercontent.com/jamesbarlow16/Azure-DNS-Test/main/deploy-vnet.json?token=AIFQKMYY4M74T2OGNOLVJWLAIEPGG'
+    csmFile: 'https://raw.githubusercontent.com/jamesbarlow16/Azure-DNS-Test/main/deploy-vnet.json'
     overrideParameters: '-projectName MyProject'
     deploymentMode: 'Incremental'
     deploymentName: 'my deployment'
