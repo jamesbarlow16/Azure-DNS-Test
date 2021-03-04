@@ -22,4 +22,4 @@ steps:
     csmFile: 'deploy-vnet.json'
     overrideParameters: '-projectName MyProject'
     deploymentMode: 'Incremental'
-    deploymentName: 'my deployment'
+    deploymentName: 'mydeployment'
