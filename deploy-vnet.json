@@ -20,11 +20,11 @@
         },
         "ipv6Enabled": {
             "type": "bool",
-            "defaultValue": "false"
+            "defaultValue": false
         },
         "subnetCount": {
             "type": "int",
-            "defaultValue": "1"
+            "defaultValue": 1
         },
         "subnet0_name": {
             "type": "string",
@@ -36,15 +36,15 @@
         },
         "ddosProtectionPlanEnabled": {
             "type": "bool",
-            "defaultValue": "false"
+            "defaultValue": false
         },
         "firewallEnabled": {
             "type": "bool",
-            "defaultValue": "false"
+            "defaultValue": false
         },
         "bastionEnabled": {
             "type": "bool",
-            "defaultValue": "false"
+            "defaultValue": false
         }
     },
     "variables": {},
