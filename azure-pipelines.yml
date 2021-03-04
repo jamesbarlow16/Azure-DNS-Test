@@ -10,11 +10,16 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
-
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: 'DonkeyLabDev Trial'
+    subscriptionId: 'cbc12084-2e8e-4f11-a651-5a311cee95d7'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: 'dns-test-deligation'
+    location: 'UK South'
+    templateLocation: 'Linked artifact'
+    csmFile: 'https://raw.githubusercontent.com/jamesbarlow16/Azure-DNS-Test/main/deploy-vnet.json?token=AIFQKMYY4M74T2OGNOLVJWLAIEPGG'
+    overrideParameters: '-projectName MyProject'
+    deploymentMode: 'Incremental'
+    deploymentName: 'my deployment'
