@@ -1,0 +1,24 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: 'DonkeyLabDev Trial'
+    subscriptionId: 'cbc12084-2e8e-4f11-a651-5a311cee95d7'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: 'dns-test-deligation'
+    location: 'UK South'
+    templateLocation: 'Linked artifact'
+    csmFile: 'deploy-vnet.json'
+    deploymentMode: 'Incremental'
+    deploymentName: 'mydeployment'
