@@ -1,0 +1,36 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "UK South"
+        },
+        "virtualNetworkName": {
+            "value": "vne-dns-deligation"
+        },
+        "addressSpaces": {
+            "value": ["10.0.0.0/16"]
+        },
+        "subnet0_name": {
+            "value": "servers"
+        },
+        "subnet0_addressRange": {
+            "value": "10.0.0.0/24"
+        },
+        "ddosProtectionPlanEnabled": {
+            "value": false
+        },
+        "VM1-Name": {
+            "value": "dnstestVM1"
+        },
+        "adminUser": {
+            "value": "myAdmin1"
+        },
+        "adminPassword": {
+            "value": "J@mesisgreat"
+        },
+        "StorageAcc": {
+            "value": "dnsTestStore"
+        }
+    }
+}
