@@ -1,5 +1,5 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "location": {
@@ -39,14 +39,14 @@
             }
         },
         "adminPassword": {
-            "type": "string",
+            "type": "securestring",
             "metadata": {
                 "description": "Admin password for virtual machines"
             }
         },
         "vmSize": {
             "type": "string",
-            "defaultValue":"Standard_A1_v2",
+            "defaultValue":"Standard_DS1_v2",
             "metadata": {
                 "description": "size of the virtual machine"
             }
@@ -103,7 +103,9 @@
                         "name": "[parameters('subnet0_name')]",
                         "properties": {
                             "addressPrefix": "[parameters('subnet0_addressRange')]",
-                            "networkSecurityGroup": "[resourceId('Microsoft.Network/networkSecurityGroups', concat('nsg-',parameters('virtualNetworkName')))]"
+                            "networkSecurityGroup": {
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', concat('nsg-',parameters('virtualNetworkName')))]"
+                            }
                         }
                     }
                 ],
@@ -173,8 +175,8 @@
             "apiVersion": "2019-07-01",
             "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', toLower('windowsVM1storage'))]",
-                "[resourceId('Microsoft.Network/networkInterfaces', 'windowsVM1-NetworkInterface')]"
+                "[resourceId('Microsoft.Storage/storageAccounts', toLower(parameters('StorageAcc')))]",
+                "[resourceId('Microsoft.Network/networkInterfaces', concat('vNic-',parameters('VM1-Name')))]"
             ],
             "tags": {
                 "displayName": "[parameters('VM1-Name')]"
@@ -182,11 +184,6 @@
             "properties": {
                 "hardwareProfile": {
                     "vmSize": "[parameters('vmSize')]"
-                },
-                "priority": "Spot",
-                "evictionPolicy": "Deallocate",
-                "billingProfile": {
-                    "maxPrice": -1
                 },
                 "osProfile": {
                     "computerName": "[parameters('VM1-Name')]",
@@ -204,7 +201,7 @@
                         "name":  "[concat('vDisk-', parameters('VM1-Name'))]",
                         "caching": "ReadWrite",
                         "createOption": "FromImage",
-                        "diskSizeGB": 80
+                        "diskSizeGB": 127
                     }
                 },
                 "networkProfile": {
@@ -217,7 +214,7 @@
                 "diagnosticsProfile": {
                     "bootDiagnostics": {
                         "enabled": true,
-                        "storageUri": "[reference(resourceId('Microsoft.Storage/storageAccounts/', toLower('stoVMstorage'))).primaryEndpoints.blob]"
+                        "storageUri": "[reference(resourceId('Microsoft.Storage/storageAccounts/', toLower(parameters('StorageAcc')))).primaryEndpoints.blob]"
                     }
                 }
             }

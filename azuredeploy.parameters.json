@@ -27,7 +27,12 @@
             "value": "myAdmin1"
         },
         "adminPassword": {
-            "value": "J@mesisgreat"
+            "reference": {
+                "keyVault": {
+                "id": "/subscriptions/cbc12084-2e8e-4f11-a651-5a311cee95d7/resourceGroups/static-resources/providers/Microsoft.KeyVault/vaults/kva-MyVault"
+                },
+                "secretName": "VMAdminPassword"
+              }
         },
         "StorageAcc": {
             "value": "dnsTestStore"
